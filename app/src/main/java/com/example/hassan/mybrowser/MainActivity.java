@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     EditText urled;
     Stack<String> stack1;
     Stack<String> stack2;
+    String buffer="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,27 +35,36 @@ public class MainActivity extends AppCompatActivity {
         forwbtn=(Button)findViewById(R.id.forw);
         urled=(EditText)findViewById(R.id.url);
         stack1=new Stack<>();
+        stack2=new Stack<>();
     }
     public void goToUrl(View view){
         String url=urled.getText().toString();
+        Toast.makeText(getApplicationContext(),"Goging To "+url,Toast.LENGTH_LONG).show();
         View.loadUrl(url);
-        stack1.push(url);
+        stack1.push(buffer);
+        buffer=url;
     }
     public  void goBack(View v){
-        if(stack1.empty()){
-            Toast.makeText(this,"no url to back to",Toast.LENGTH_LONG);
+        Toast.makeText(getApplicationContext(),"GoBack Clicked",Toast.LENGTH_LONG).show();
+        if(stack1.size()==1){
+            Toast.makeText(this,"no url to back to",Toast.LENGTH_LONG).show();
         }else{
             String url=stack1.pop();
-            stack2.push(url);
+            stack2.push(buffer);
+            buffer=url;
+            Toast.makeText(getApplicationContext(),"Goging To "+url,Toast.LENGTH_LONG).show();
             View.loadUrl(url);
         }
     }
     public  void goForward(View v){
+        Toast.makeText(getApplicationContext(),"goForward Clicked",Toast.LENGTH_LONG).show();
         if(stack2.empty()){
-            Toast.makeText(this,"no url to go to",Toast.LENGTH_LONG);
+            Toast.makeText(this,"no url to go to",Toast.LENGTH_LONG).show();
         }else{
             String url=stack2.pop();
-            stack1.push(url);
+            stack1.push(buffer);
+            buffer=url;
+            Toast.makeText(getApplicationContext(),"Goging To "+url,Toast.LENGTH_LONG).show();
             View.loadUrl(url);
         }
     }
