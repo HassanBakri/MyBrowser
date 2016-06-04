@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
         urled=(EditText)findViewById(R.id.url);
         stack1=new Stack<>();
         stack2=new Stack<>();
+        View.setWebViewClient(new MyBrowser());
+        View.getSettings().setLoadsImagesAutomatically(true);
+        View.getSettings().setJavaScriptEnabled(true);
+        View.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
     }
     public void goToUrl(View view){
         String url=urled.getText().toString();
