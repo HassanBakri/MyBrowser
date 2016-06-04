@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity {
     WebView View ;
     Button backbtn,gobtn,forwbtn;
     EditText urled;
-    Stack<String> stack1;
-    Stack<String> stack2;
-    String buffer="";
+    private static Stack<String> stack1;
+    private static Stack<String> stack2;
+    static String buffer="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public  void goForward(View v){
-        Toast.makeText(getApplicationContext(),"goForward Clicked",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "goForward Clicked", Toast.LENGTH_LONG).show();
         if(stack2.empty()){
             Toast.makeText(this,"no url to go to",Toast.LENGTH_LONG).show();
         }else{
@@ -78,7 +78,15 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+    public static void setCurrent(String url){
+        buffer=url;
+    }
+    public static void  pushInHistory(){
+        stack1.push(buffer);
+    }
+    public static  void pushInForward(String url){
+        stack2.push(url);
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

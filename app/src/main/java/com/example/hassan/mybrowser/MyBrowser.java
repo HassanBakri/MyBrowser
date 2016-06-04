@@ -10,6 +10,8 @@ import android.webkit.WebViewClient;
 class MyBrowser extends WebViewClient {
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        MainActivity.pushInHistory();
+        MainActivity.setCurrent(url);
         view.loadUrl(url);
         return true;
     }
